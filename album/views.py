@@ -2,7 +2,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
-from django.shortcuts import  reverse
+from django.shortcuts import render, reverse
 
 from album.models import Album
 
@@ -42,7 +42,7 @@ class AlbumCreateView(LoginRequiredMixin, CreateView):
             return HttpResponseRedirect(self.get_success_url())
 
         else:
-            return HttpResponseRedirect(reverse('album:create'))
+            return render(request, self.template_name, {'form': form})
 
     def get_success_url(self):
         return reverse('album:overview')
