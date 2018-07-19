@@ -1,8 +1,43 @@
 {% extends "base.html" %}
 
 {%  block content %}
-{% for album in album_list %}
-    {{ album.album_name }}
-{% endfor %}
+
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-primary filterable">
+            <div class="panel-heading">
+                <h3 class="panel-title">Album</h3>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Album Name</th>
+                        <th>Artist Name</th>
+                        <th>Genre</th>
+                        <th>Released Date</th>
+                        <th>Length</th>
+                        <th>Added by</th>
+                        <th>Rating (1-10)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for album in album_list %}
+                    <tr>
+                    <td>{{ album.album_name }}</td>
+                    <td>{{ album.artist_name }}</td>
+                    <td>{{ album.get_genre }}</td>
+                    <td>{{ album.released_date }}</td>
+                    <td>{{ album.length }}</td>
+                    <td>{{ album.added_by.username }}</td>
+                    <td>{{ album.get_rating }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+
+
 
 {% endblock %}

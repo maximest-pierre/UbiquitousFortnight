@@ -2,6 +2,8 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
 
+from statistics import mean, StatisticsError
+
 
 class Album(models.Model):
     class Meta:
@@ -20,6 +22,31 @@ class Album(models.Model):
 
     def __str__(self):
         return "%s - %s" % (self.artist_name, self.album_name)
+
+    def get_rating(self):
+        ratings = self.album_rating.all()
+
+        rating_list = []
+
+        for rating in ratings:
+            rating_list.append(rating.rating)
+
+        try:
+            return round(mean(rating_list), 1)
+        except StatisticsError:
+            return ""
+
+    def get_genre(self):
+        genres = self.genre.all()
+
+        genre_list = []
+
+        for genre in genres:
+            genre_list.append(genre.genre_name)
+
+        return ", ".join(genre_list)
+
+
 
 
 class Genre(models.Model):
