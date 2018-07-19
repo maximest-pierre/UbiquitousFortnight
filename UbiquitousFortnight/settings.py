@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'album',
+    'authentication',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -100,6 +102,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGIN_REDIRECT_URL = "/"
+LOGIN_URL = "/account"
+LOGOUT_REDIRECT_URL = "/account"
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
