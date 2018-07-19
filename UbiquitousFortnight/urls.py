@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls import url
+from album.views import AlbumOverviewView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('album/', include('album.urls', namespace="album")),
+    path('account/', include('authentication.urls', namespace="authentication")),
+    url(r'^$', AlbumOverviewView.as_view())
 ]

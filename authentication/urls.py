@@ -1,0 +1,10 @@
+from django.conf.urls import url
+from authentication.forms import LoginForm
+from django.contrib.auth import views as auth_views
+
+app_name = "authentication"
+
+urlpatterns =[
+    url(r'^$', auth_views.login, {'template_name': 'system/login.html', 'authentication_form': LoginForm}, name="login"),
+    url(r'^logout/$', auth_views.logout, name="logout"),
+]

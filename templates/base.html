@@ -10,11 +10,27 @@
 
     <body>
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-        <a class="navbar-brand" href="#">Ubiquitous Fortnight</a>
+        <a class="navbar-brand" href="">Ubiquitous Fortnight</a>
         <ul class="navbar-nav">
+            {% if user.is_authenticated %}
             <li class="nav-item">
                 <a class="nav-link" href="#">Album</a>
             </li>
+
+            {% endif %}
+            {% if user.is_authenticated %}
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Account
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+          <a class="dropdown-item" href="{% url "authentication:logout" %}">Logout</a>
+
+        </div>
+             {% endif %}
+      </li>
         </ul>
     </nav>
     <div id="content">
