@@ -17,10 +17,13 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls import url
 from album.views import AlbumOverviewView
+from rest_framework import routers
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('album/', include('album.urls', namespace="album")),
     path('account/', include('authentication.urls', namespace="authentication")),
-    url(r'^$', AlbumOverviewView.as_view())
+    path('api/', include("api.urls", namespace="api")),
+    url(r'^$', AlbumOverviewView.as_view()),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
