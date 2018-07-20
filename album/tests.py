@@ -72,7 +72,7 @@ class AlbumCreateFormTest(TestCase):
 
     def test_access_to_form(self):
         result = self.client.get(
-            reverse("album:create"),
+            reverse("album:create_album"),
             follow=True
 
         )
@@ -88,7 +88,7 @@ class AlbumCreateFormTest(TestCase):
         }
 
         response = self.client.post(
-            reverse("album:create"), data, follow=True,
+            reverse("album:create_album"), data, follow=True,
         )
         album = Album.objects.get(album_name="Test")
 
