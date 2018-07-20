@@ -14,10 +14,8 @@ class AlbumOverviewView(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print(context['album_list'])
         context['user_rating'] = []
         for album in context['album_list']:
-            print(album)
             try:
                 rating = album.album_rating.get(user=self.request.user)
             except Rating.DoesNotExist:
