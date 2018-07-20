@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{%  load rating_extras %}
+
 {%  block content %}
 
     <div class="container">
@@ -23,7 +25,9 @@
                         <th>Length</th>
                         <th>Added by</th>
                         <th>Rating (1-10)</th>
-                        <th>Add Rating</th>
+                        <th>Your Rating</th>
+                        <th>Edit Rating</th>
+                        <th>Delete Rating</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,7 +40,15 @@
                     <td>{{ album.length }}</td>
                     <td>{{ album.added_by.username }}</td>
                     <td>{{ album.get_rating }}</td>
-                        <td><a class="btn btn-primary" href="#">Add Rating</a></td>
+                    {% if user_rating|get_rating_user:forloop.counter0 %}
+                    <td>{{ user_rating|get_rating_user:forloop.counter0 }}</td>
+                        <td><a class="btn btn-secondary" href="{% url "album:update_rating" pk=user_rating|get_rating_id:forloop.counter0 %}">Edit Rating</a></td>
+                        <td><a class="btn btn-danger" href="{% url "album:delete_rating" pk=user_rating|get_rating_id:forloop.counter0 %}">Delete Rating</a></td>
+                    {% else %}
+                    <td><a class="btn btn-success" href="{% url "album:new_rate" album_id=album.id %}">Add Rating</a></td>
+                        <td></td>
+                        <td></td>
+                    {% endif %}
                     </tr>
                 {% endfor %}
                 </tbody>
